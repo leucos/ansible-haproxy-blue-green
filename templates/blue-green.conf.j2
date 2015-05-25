@@ -1,0 +1,20 @@
+frontend {{ haproxy_frontback_name }}
+  bind *:80
+  default_backend {{ haproxy_frontback_name }}_backend_{{ blue_green_color }}
+
+backend {{ haproxy_frontback_name }}_backend_blue
+  {% if blue_green_color != "blue" %}disabled{% endif %}
+  balance roundrobin
+  mode http
+{% for bck in groups[haproxy_frontback_backend_group] %}
+  server web_{{ bck }}_blue {{ hostvars[bck]['ansible_default_ipv4']['address'] }}:{{ blue_green.blue.port }} check
+{% endfor %}
+
+backend {{ haproxy_frontback_name }}_backend_green
+  {% if blue_green_color != "green" %}disabled
+{% endif %}
+  balance roundrobin
+  mode http
+{% for bck in groups[haproxy_frontback_backend_group] %}
+  server web_{{ bck }}_green {{ hostvars[bck]['ansible_default_ipv4']['address'] }}:{{ blue_green.green.port }} check
+{% endfor %}

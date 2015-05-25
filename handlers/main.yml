@@ -1,0 +1,18 @@
+- name: Restart loadbalancers
+  command: service haproxy-multi check
+  delegate_to: "{{ item }}"
+  with_items: groups[haproxy_bluegreen_loadbalancers]
+  notify: Force restart loadbalancers
+
+- name: Force restart loadbalancers
+  service: name=haproxy-multi state=restarted
+  delegate_to: "{{ item }}"
+  with_items: groups[haproxy_bluegreen_loadbalancers]
+  notify: Check that haproxy runs
+
+- name: Check that haproxy runs 
+  command: service haproxy-multi status
+  delegate_to: "{{ item }}"
+  with_items: groups[haproxy_bluegreen_loadbalancers]
+
+

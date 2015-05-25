@@ -1,0 +1,8 @@
+- fail: msg="blue_green_color is not defined"
+  when: blue_green_color is not defined
+
+- fail: msg="I can only deploy blue or green, not {{ blue_green_color }}"
+  when: "blue_green_color != 'blue' and blue_green_color != 'green'"
+  
+- include: haproxy-blue-green.yml tags=haproxy-blue-green:blue:green
+
