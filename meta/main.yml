@@ -18,6 +18,5 @@ galaxy_info:
     - web
 
 dependencies: 
-  - leucos.haproxy-multi
   - leucos.blue-green
 
