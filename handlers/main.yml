@@ -9,6 +9,7 @@
   delegate_to: "{{ item }}"
   with_items: groups[haproxy_blue_green_loadbalancers]
   notify: Check that haproxy runs
+  run_once: true
 
 - name: Check that haproxy runs 
   command: service haproxy-multi status
