@@ -18,5 +18,6 @@ galaxy_info:
     - web
 
 dependencies: 
-  - leucos.blue-green
+  - role: ansible-blue-green
+    src: https://github.com/leucos/ansible-blue-green.git
 
