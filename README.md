@@ -31,11 +31,11 @@ Usage
 
 The role is supposed to be used this way from a playbook:
 
-   - { role: leucos.haproxy-blue-green,
-       haproxy_blue_green_front_name: 'myfront',
-       haproxy_blue_green_loadbalancers: 'lb',
-       haproxy_blue_green_backend_group: 'www',
-       when: blue_green_color is defined }
+    - { role: leucos.haproxy-blue-green,
+        haproxy_blue_green_front_name: 'myfront',
+        haproxy_blue_green_loadbalancers: 'lb',
+        haproxy_blue_green_backend_group: 'www',
+        when: blue_green_color is defined }
 
 `blue_green_color` can be set earlier in the playbook using `leucos.blue-green` role, which tries to guess which color is the oldest (and thus, can be redeployed).
 
